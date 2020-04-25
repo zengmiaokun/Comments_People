@@ -43,7 +43,10 @@ class HubeiSpider(scrapy.Spider):
         self.cityNums -= 1
         if self.cityNums < 1:
             for fid in self.fidList:
-                self.tidList += getTid(int(fid), self.domainName)
+                try:
+                    self.tidList += getTid(int(fid), self.domainName)
+                except:
+                    print("%s 获取失败" % fid)
             print(self.tidList)
             url = 'http://liuyan.people.com.cn/threads/content?tid='
             for tid in self.tidList:

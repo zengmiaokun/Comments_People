@@ -21,6 +21,6 @@ class CommentsItem(scrapy.Item):
     tag = scrapy.Field()
     ctype = scrapy.Field()
     content = scrapy.Field()
-    posttime = scrapy.Field()
+    postTime = scrapy.Field()
     reply = scrapy.Field()
     replyTime = scrapy.Field()
