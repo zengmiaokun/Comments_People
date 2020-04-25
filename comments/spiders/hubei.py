@@ -12,7 +12,6 @@ class HubeiSpider(scrapy.Spider):
 
     # Store leaders' ID
     fidList = []
-    tidList = []
     cityNums = 0
 
 
@@ -43,14 +42,14 @@ class HubeiSpider(scrapy.Spider):
         self.cityNums -= 1
         if self.cityNums < 1:
             for fid in self.fidList:
+                tids = []
                 try:
-                    self.tidList += getTid(int(fid), self.domainName)
+                    tids = getTid(int(fid), self.domainName)
                 except:
                     print("%s 获取失败" % fid)
-            print(self.tidList)
-            url = 'http://liuyan.people.com.cn/threads/content?tid='
-            for tid in self.tidList:
-                yield scrapy.Request(url=url + tid, callback=self.parse)
+                url = 'http://liuyan.people.com.cn/threads/content?tid='
+                for tid in tids:
+                    yield scrapy.Request(url=url + tid, callback=self.parse)
 
     def parse(self, response):
         # zone, name, title, status, tag, ctype, content, postTime, reply, replyTime
@@ -72,3 +71,5 @@ class HubeiSpider(scrapy.Spider):
         else:
             item['reply'] = 'NULL'
             item['replyTime'] = 'NULL'
+
+        yield item
