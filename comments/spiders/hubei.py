@@ -44,10 +44,10 @@ class HubeiSpider(scrapy.Spider):
         if self.cityNums < 1:
             for fid in self.fidList:
                 self.tidList += getTid(int(fid), self.domainName)
-
-        url = 'http://liuyan.people.com.cn/threads/content?tid='
-        for tid in self.tidList:
-            yield scrapy.Request(url=url + tid, callback=self.parse)
+            print(self.tidList)
+            url = 'http://liuyan.people.com.cn/threads/content?tid='
+            for tid in self.tidList:
+                yield scrapy.Request(url=url + tid, callback=self.parse)
 
     def parse(self, response):
         # zone, name, title, status, tag, ctype, content, postTime, reply, replyTime

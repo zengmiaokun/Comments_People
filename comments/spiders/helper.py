@@ -18,6 +18,7 @@ def load_data(api, formdata, headers):
     return data
 
 def getTid(fid, domainName):
+    headers['Referer'] = 'http://liuyan.people.com.cn/threads/list?fid=' + str(fid)
     formdata = {'fid': fid, 'lastItem': 0}
     tids = []
     while True:
