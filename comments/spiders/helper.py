@@ -25,11 +25,12 @@ def getTid(fid, domainName):
         data = load_data(api, formdata, headers)
         for line in data['responseData']:
             if line['domainName'] in domainName:
+                print("Get `tid`: %s" % str(line['tid']))
                 tids.append(str(line['tid']))
         if len(data['responseData']) < 10:
             break
         else:
-            formdata['lastItem'] = tids[-1]
+            formdata['lastItem'] = str(data['responseData'][-1]['tid'])
     return tids
 
 if __name__ == "__main__":

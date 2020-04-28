@@ -42,6 +42,7 @@ class HubeiSpider(scrapy.Spider):
         self.cityNums -= 1
         if self.cityNums < 1:
             for fid in self.fidList:
+                print("Get `tid` from `fid` = %s" % fid)
                 tids = []
                 try:
                     tids = getTid(int(fid), self.domainName)
